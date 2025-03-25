@@ -21,11 +21,18 @@ public class NaryTreeNode<E> {
     private static final String VALUE_PREFIX = "[";
     private static final String VALUE_SUFFIX = "]";
     private static final String VALUE_NULL = "null";
-    private static final String VALUE_PRETTY_DEPTH = "│ ";
-    private static final String VALUE_PRETTY_CHILDREN_PREFIX = "├─";
+    private static final String VALUE_PRETTY_DEPTH = "  ";
+    private static final String VALUE_PRETTY_CHILDREN_PREFIX = "|-";
     private final LinkedList<NaryTreeNode<E>> children;
 
     private E value;
+
+    /**
+     * Instantiates a new Nary tree node.
+     */
+    public NaryTreeNode() {
+        this(null);
+    }
 
     /**
      * Instantiates a new Nary tree node.
@@ -35,13 +42,6 @@ public class NaryTreeNode<E> {
     public NaryTreeNode(final E value) {
         this.value = value;
         this.children = new LinkedList<>();
-    }
-
-    /**
-     * Instantiates a new Nary tree node.
-     */
-    public NaryTreeNode() {
-        this(null);
     }
 
     /**
@@ -84,19 +84,19 @@ public class NaryTreeNode<E> {
     /**
      * Add child.
      *
-     * @param child the child
+     * @param childValue the child value
      */
-    public void addChild(final NaryTreeNode<E> child) {
-        this.children.add(child);
+    public void addChild(final E childValue) {
+        this.addChild(new NaryTreeNode<>(childValue));
     }
 
     /**
      * Add child.
      *
-     * @param childValue the child value
+     * @param child the child
      */
-    public void addChild(final E childValue) {
-        this.addChild(new NaryTreeNode<>(childValue));
+    public void addChild(final NaryTreeNode<E> child) {
+        this.children.add(child);
     }
 
     /**
@@ -301,22 +301,5 @@ public class NaryTreeNode<E> {
             queue.addAll(node.children);
         }
         return list;
-    }
-
-    /**
-     * Get node from element.
-     *
-     * @param element the element
-     * @return the node which has element as value
-     */
-    public final NaryTreeNode<E> getNodeFromElement(final E element){
-        if(this.value == element) return this;
-        NaryTreeNode<E> result = null;
-        for(NaryTreeNode<E> child : this.children){
-            NaryTreeNode<E> response = child.getNodeFromElement(element);
-            result = (response == null) ? result : response;
-
-        }
-        return result;
     }
 }

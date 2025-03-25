@@ -198,50 +198,50 @@ public class NaryTreeNodeTest {
         final NaryTreeNode<String> subSubChild211 = new NaryTreeNode<>("subSubChild211");
         assertEquals("""
                 root
-                 """, treeNode.toPrettyText());
+                """, treeNode.toPrettyText());
         treeNode.addChild(child1);
         assertEquals("""
                 root
-                ├─child1
-                 """, treeNode.toPrettyText());
+                |-child1
+                """, treeNode.toPrettyText());
         treeNode.addChild(child2);
         assertEquals("""
                 root
-                ├─child1
-                ├─child2
-                 """, treeNode.toPrettyText());
+                |-child1
+                |-child2
+                """, treeNode.toPrettyText());
         child1.addChild(subChild11);
         child1.addChild(subChild12);
         assertEquals("""
                 root
-                ├─child1
-                │ ├─subChild11
-                │ ├─subChild12
-                ├─child2
-                                 """, treeNode.toPrettyText());
+                |-child1
+                  |-subChild11
+                  |-subChild12
+                |-child2
+                """, treeNode.toPrettyText());
         child2.addChild(subChild21);
         child2.addChild(subChild22);
         assertEquals("""
                 root
-                ├─child1
-                │ ├─subChild11
-                │ ├─subChild12
-                ├─child2
-                │ ├─subChild21
-                │ ├─subChild22
-                 """, treeNode.toPrettyText());
+                |-child1
+                  |-subChild11
+                  |-subChild12
+                |-child2
+                  |-subChild21
+                  |-subChild22
+                """, treeNode.toPrettyText());
         subChild21.addChild(subSubChild211);
         treeNode.addChild(child3);
         assertEquals("""
                 root
-                ├─child1
-                │ ├─subChild11
-                │ ├─subChild12
-                ├─child2
-                │ ├─subChild21
-                │ │ ├─subSubChild211
-                │ ├─subChild22
-                ├─child3
+                |-child1
+                  |-subChild11
+                  |-subChild12
+                |-child2
+                  |-subChild21
+                    |-subSubChild211
+                  |-subChild22
+                |-child3
                 """, treeNode.toPrettyText());
     }
 
@@ -339,49 +339,5 @@ public class NaryTreeNodeTest {
         d.addChild(m);
         List<String> byWidthListExpected = List.of("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M");
         assertEquals(byWidthListExpected, a.toByWidthList());
-    }
-
-    @Test
-    void getNodeFromElement() {
-        final NaryTreeNode<String> a = new NaryTreeNode<>("A");
-        final NaryTreeNode<String> b = new NaryTreeNode<>("B");
-        final NaryTreeNode<String> c = new NaryTreeNode<>("C");
-        final NaryTreeNode<String> d = new NaryTreeNode<>("D");
-        final NaryTreeNode<String> e = new NaryTreeNode<>("E");
-        final NaryTreeNode<String> f = new NaryTreeNode<>("F");
-        final NaryTreeNode<String> g = new NaryTreeNode<>("G");
-        final NaryTreeNode<String> h = new NaryTreeNode<>("H");
-        final NaryTreeNode<String> i = new NaryTreeNode<>("I");
-        final NaryTreeNode<String> j = new NaryTreeNode<>("J");
-        final NaryTreeNode<String> k = new NaryTreeNode<>("K");
-        final NaryTreeNode<String> l = new NaryTreeNode<>("L");
-        final NaryTreeNode<String> m = new NaryTreeNode<>("M");
-
-        a.addChild(b);
-        a.addChild(c);
-        b.addChild(d);
-        b.addChild(e);
-        b.addChild(f);
-        b.addChild(g);
-        c.addChild(h);
-        c.addChild(i);
-        c.addChild(j);
-        d.addChild(k);
-        d.addChild(l);
-        d.addChild(m);
-        assertEquals(a, a.getNodeFromElement("A"));
-        assertEquals(b, a.getNodeFromElement("B"));
-        assertEquals(c, a.getNodeFromElement("C"));
-        assertEquals(d, a.getNodeFromElement("D"));
-        assertEquals(e, a.getNodeFromElement("E"));
-        assertEquals(f, a.getNodeFromElement("F"));
-        assertEquals(g, a.getNodeFromElement("G"));
-        assertEquals(h, a.getNodeFromElement("H"));
-        assertEquals(i, a.getNodeFromElement("I"));
-        assertEquals(j, a.getNodeFromElement("J"));
-        assertEquals(k, a.getNodeFromElement("K"));
-        assertEquals(l, a.getNodeFromElement("L"));
-        assertEquals(m, a.getNodeFromElement("M"));
-
     }
 }
